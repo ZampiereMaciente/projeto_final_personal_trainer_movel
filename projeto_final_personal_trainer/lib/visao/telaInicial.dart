@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final_personal_trainer/controle/fecharApp.dart';
 import 'package:projeto_final_personal_trainer/visao/novaAvaliacao.dart';
-
+import '../modelo/abrir_pdf_tela.dart';
 
 class TelaInicial extends StatelessWidget {
   const TelaInicial({super.key});
@@ -37,11 +38,14 @@ class TelaInicial extends StatelessWidget {
                 minimumSize: const Size.fromHeight(50),
               ),
             ),
-
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () {
-                // Aqui futuramente: Navigator.push para abrir lista de PDFs
+                // Navegação para a tela de abrir PDF
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AbrirPdfTela()),
+                );
               },
               icon: const Icon(Icons.folder_open),
               label: const Text('Abrir Avaliação (PDF)'),
@@ -52,7 +56,7 @@ class TelaInicial extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () {
-                // Aqui futuramente: fechar o app
+                FecharApp.fecharApp(context);
               },
               icon: const Icon(Icons.exit_to_app),
               label: const Text('Fechar Aplicativo'),

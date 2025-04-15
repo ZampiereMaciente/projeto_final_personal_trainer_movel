@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final_personal_trainer/controle/navegacao_controller.dart';
-import 'package:projeto_final_personal_trainer/visao/dadosAluno1.dart';
+import '../modelo/aluno.dart';
+import 'tela_imc.dart';
 
 class DadosAntropometria extends StatefulWidget {
-  const DadosAntropometria({super.key});
+  final Aluno aluno;
+
+  const DadosAntropometria({super.key, required this.aluno});
 
   @override
   State<DadosAntropometria> createState() => _DadosAntropometriaState();
@@ -54,6 +56,36 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
     super.dispose();
   }
 
+  void _irParaTelaImc() {
+    if (_formKey.currentState!.validate()) {
+      // Preenchendo os dados no objeto Aluno
+      widget.aluno.triceps = tricepsController.text;
+      widget.aluno.subescapular = subescapularController.text;
+      widget.aluno.suprailica = suprailicaController.text;
+      widget.aluno.abdomenDobras = abdomenDobrasController.text;
+
+      widget.aluno.bracoDir = bracoDirController.text;
+      widget.aluno.bracoEsq = bracoEsqController.text;
+      widget.aluno.antebracoDir = antebracoDirController.text;
+      widget.aluno.antebracoEsq = antebracoEsqController.text;
+      widget.aluno.abdomenCirc = abdomenCircController.text;
+      widget.aluno.quadril = quadrilController.text;
+      widget.aluno.cintura = cinturaController.text;
+      widget.aluno.coxaDir = coxaDirController.text;
+      widget.aluno.coxaEsq = coxaEsqController.text;
+      widget.aluno.pernaDir = pernaDirController.text;
+      widget.aluno.pernaEsq = pernaEsqController.text;
+
+      // Ir para próxima tela
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TelaImc(aluno: widget.aluno),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,8 +112,8 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
 
               _buildTextField("Braço (dir)", bracoDirController),
               _buildTextField("Braço (esq)", bracoEsqController),
-              _buildTextField("Anti Braço (dir)", antebracoDirController),
-              _buildTextField("Anti Braço (esq)", antebracoEsqController),
+              _buildTextField("Antibraço (dir)", antebracoDirController),
+              _buildTextField("Antibraço (esq)", antebracoEsqController),
               _buildTextField("Abdômen", abdomenCircController),
               _buildTextField("Quadril", quadrilController),
               _buildTextField("Cintura", cinturaController),
@@ -92,13 +124,12 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
 
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  NavegacaoController.irParaTelaComValidacao(
-                    context: context,
-                    formKey: _formKey,
-                    proximaTela: const DadosAluno1(),
-                  );
-                },
+                onPressed: _irParaTelaImc,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                  foregroundColor: Colors.white,
+                  minimumSize: const Size.fromHeight(50),
+                ),
                 child: const Text("Próximo"),
               ),
             ],
@@ -118,6 +149,12 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
           border: const OutlineInputBorder(),
         ),
         keyboardType: TextInputType.number,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Informe o valor';
+          }
+          return null;
+        },
       ),
     );
   }

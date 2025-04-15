@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_final_personal_trainer/visao/dadosAntropometria.dart';
-import 'dadosAluno1.dart';
-import 'package:projeto_final_personal_trainer/controle/navegacao_controller.dart';
+import '../modelo/aluno.dart';
+import 'dadosAluno1.dart'; // Aqui está sua classe Aluno
 
 class NovaAvaliacao extends StatefulWidget {
   const NovaAvaliacao({Key? key}) : super(key: key);
@@ -17,8 +17,6 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
   final telefoneController = TextEditingController();
   final emailController = TextEditingController();
   final dataProxController = TextEditingController();
-  final pesoController = TextEditingController();
-  final alturaController = TextEditingController();
 
   @override
   void dispose() {
@@ -27,9 +25,26 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
     telefoneController.dispose();
     emailController.dispose();
     dataProxController.dispose();
-    pesoController.dispose();
-    alturaController.dispose();
     super.dispose();
+  }
+
+  void _irParaProximaTela() {
+    if (_formKey.currentState!.validate()) {
+      final aluno = Aluno(
+        nome: nomeController.text,
+        nascimento: nascimentoController.text,
+        telefone: telefoneController.text,
+        email: emailController.text,
+        dataProximaAvaliacao: dataProxController.text,
+      );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DadosAntropometria(aluno: aluno),
+        ),
+      );
+    }
   }
 
   @override
@@ -67,13 +82,7 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  NavegacaoController.irParaTelaComValidacao(
-                    context: context,
-                    formKey: _formKey,
-                    proximaTela: const DadosAntropometria(),
-                  );
-                },
+                onPressed: _irParaProximaTela,
                 child: const Text("Próximo"),
               ),
             ],
