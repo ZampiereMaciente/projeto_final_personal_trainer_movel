@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:projeto_final_personal_trainer/main.dart';
-import 'package:projeto_final_personal_trainer/visao/telaInicial.dart';
+import 'package:projeto_final_personal_trainer/visao/tela_inicial.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

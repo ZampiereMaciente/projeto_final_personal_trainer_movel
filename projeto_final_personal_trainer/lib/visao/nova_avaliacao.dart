@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final_personal_trainer/visao/dadosAntropometria.dart';
+import 'package:projeto_final_personal_trainer/visao/dados_antropometria.dart';
 import '../modelo/aluno.dart';
-import 'dadosAluno1.dart'; // Aqui está sua classe Aluno
+import 'teste.dart'; // Aqui está sua classe Aluno
 
 class NovaAvaliacao extends StatefulWidget {
   const NovaAvaliacao({Key? key}) : super(key: key);

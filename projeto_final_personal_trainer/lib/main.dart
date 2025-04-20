@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final_personal_trainer/visao/telaInicial.dart';
+import 'package:projeto_final_personal_trainer/visao/tela_inicial.dart';
 
 void main() {
   runApp(const MyApp());

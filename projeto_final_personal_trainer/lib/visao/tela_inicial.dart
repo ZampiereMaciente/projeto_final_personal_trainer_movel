@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final_personal_trainer/controle/fecharApp.dart';
-import 'package:projeto_final_personal_trainer/visao/novaAvaliacao.dart';
-import '../modelo/abrir_pdf_tela.dart';
+import 'package:projeto_final_personal_trainer/controle/fechar_app_controle.dart';
+import 'package:projeto_final_personal_trainer/visao/nova_avaliacao.dart';
+import '../servicos/abrir_pdf_tela.dart';
 
 class TelaInicial extends StatelessWidget {
   const TelaInicial({super.key});

@@ -11,7 +11,8 @@ class GeradorPdf {
     required Map<String, String> dobrasCutaneas,
     required Map<String, String> circunferencias,
     required String resultadoImc,
-    required String nomeAluno, // Adicionando o nome do aluno
+    required String resultadoTmb, // <- Novo parâmetro
+    required String nomeAluno,
   }) async {
     final pdf = pw.Document();
 
@@ -26,39 +27,35 @@ class GeradorPdf {
           // Seção: Dados Pessoais
           pw.Text('Dados Pessoais', style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
           _criarTabela(dadosPessoais),
-
           pw.SizedBox(height: 20),
 
           // Seção: Dobras Cutâneas
           pw.Text('Dobras Cutâneas (mm)', style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
           _criarTabela(dobrasCutaneas),
-
           pw.SizedBox(height: 20),
 
           // Seção: Circunferências
           pw.Text('Circunferências (cm)', style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
           _criarTabela(circunferencias),
-
           pw.SizedBox(height: 20),
 
           // Seção: IMC
           pw.Text('Resultado IMC', style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
           pw.Text(resultadoImc),
+          pw.SizedBox(height: 20),
+
+          // Seção: TMB
+          pw.Text('Resultado TMB', style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
+          pw.Text(resultadoTmb),
         ],
       ),
     );
 
-    // Obter diretório do aplicativo
     final dir = await getApplicationDocumentsDirectory();
-
-    // Usar o nome do aluno para criar o nome do arquivo
     final fileName = '${nomeAluno}.pdf';
     final file = File('${dir.path}/$fileName');
 
-    // Salvar o arquivo no diretório do app
     await file.writeAsBytes(await pdf.save());
-
-    // Abrir o arquivo gerado
     await OpenFilex.open(file.path);
   }
 
