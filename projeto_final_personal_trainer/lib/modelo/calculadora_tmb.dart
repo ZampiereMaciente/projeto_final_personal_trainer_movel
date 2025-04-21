@@ -13,6 +13,6 @@ class CalculadoraTmb {
       tmb = 655.1 + (9.56 * peso) + (1.85 * altura) - (4.68 * idade);
     }
 
-    return "Sua Taxa Metabólica Basal é ${tmb.toStringAsFixed(2)} kcal/dia.";
+    return "Sua Taxa Metabólica Basal é ${tmb.toStringAsFixed(2)}";
   }
 }

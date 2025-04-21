@@ -88,53 +88,118 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
 
   @override
   Widget build(BuildContext context) {
+    // Obter altura do AppBar
+    final appBarHeight = MediaQuery.of(context).padding.top + kToolbarHeight;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Dados Antropométricos')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Dobras Cutâneas (mm)',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-              _buildTextField("Tríceps", tricepsController),
-              _buildTextField("Subescapular", subescapularController),
-              _buildTextField("Suprailíaca", suprailicaController),
-              _buildTextField("Abdômen", abdomenDobrasController),
-
-              const SizedBox(height: 24),
-              const Text('Circunferências (cm)',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-
-              _buildTextField("Braço (dir)", bracoDirController),
-              _buildTextField("Braço (esq)", bracoEsqController),
-              _buildTextField("Antibraço (dir)", antebracoDirController),
-              _buildTextField("Antibraço (esq)", antebracoEsqController),
-              _buildTextField("Abdômen", abdomenCircController),
-              _buildTextField("Quadril", quadrilController),
-              _buildTextField("Cintura", cinturaController),
-              _buildTextField("Coxa (dir)", coxaDirController),
-              _buildTextField("Coxa (esq)", coxaEsqController),
-              _buildTextField("Perna (dir)", pernaDirController),
-              _buildTextField("Perna (esq)", pernaEsqController),
-
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _irParaTelaImc,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  foregroundColor: Colors.white,
-                  minimumSize: const Size.fromHeight(50),
-                ),
-                child: const Text("Próximo"),
+      extendBodyBehindAppBar: true, // Permite que a imagem apareça atrás do AppBar
+      appBar: AppBar(
+        backgroundColor: Colors.transparent, // AppBar transparente
+        elevation: 0, // Remove a sombra
+        title: const Text(
+          'Dados Antropométricos',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                color: Colors.black,
+                blurRadius: 4,
+                offset: Offset(2, 2),
               ),
             ],
           ),
         ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+      body: Stack(
+        children: [
+          // Imagem de fundo
+          SizedBox.expand(
+            child: Image.asset(
+              'assets/images/academia6.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+
+          // Overlay escuro
+          Container(
+            color: Colors.black.withOpacity(0.4),
+          ),
+
+          // Conteúdo principal
+          SingleChildScrollView(
+            padding: EdgeInsets.fromLTRB(16, appBarHeight + 16, 16, 16),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Dobras Cutâneas (mm)',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black,
+                            blurRadius: 4,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                      )),
+                  const SizedBox(height: 8),
+                  _buildTextField("Tríceps", tricepsController),
+                  _buildTextField("Subescapular", subescapularController),
+                  _buildTextField("Suprailíaca", suprailicaController),
+                  _buildTextField("Abdômen", abdomenDobrasController),
+
+                  const SizedBox(height: 24),
+                  const Text('Circunferências (cm)',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black,
+                            blurRadius: 4,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                      )),
+                  const SizedBox(height: 8),
+
+                  _buildTextField("Braço (dir)", bracoDirController),
+                  _buildTextField("Braço (esq)", bracoEsqController),
+                  _buildTextField("Antibraço (dir)", antebracoDirController),
+                  _buildTextField("Antibraço (esq)", antebracoEsqController),
+                  _buildTextField("Abdômen", abdomenCircController),
+                  _buildTextField("Quadril", quadrilController),
+                  _buildTextField("Cintura", cinturaController),
+                  _buildTextField("Coxa (dir)", coxaDirController),
+                  _buildTextField("Coxa (esq)", coxaEsqController),
+                  _buildTextField("Perna (dir)", pernaDirController),
+                  _buildTextField("Perna (esq)", pernaEsqController),
+
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: _irParaTelaImc,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    child: const Text("Próximo"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -146,6 +211,8 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
+          filled: true,
+          fillColor: Colors.white70,
           border: const OutlineInputBorder(),
         ),
         keyboardType: TextInputType.number,

@@ -95,137 +95,166 @@ class _TelaImcState extends State<TelaImc> {
         'Coxa (esq)': widget.aluno.coxaEsq ?? 'Não informado',
         'Perna (dir)': widget.aluno.pernaDir ?? 'Não informado',
         'Perna (esq)': widget.aluno.pernaEsq ?? 'Não informado',
+      },
+      dadosImcTmb: {
         'Altura': _alturaController.text,
         'Peso': _pesoController.text,
         'Idade': _idadeController.text,
         'Sexo': _sexoSelecionado,
+        'Resultado IMC': _resultadoImc,
+        'Resultado TMB': _resultadoTmb,
       },
-      resultadoImc: _resultadoImc,
-      resultadoTmb: _resultadoTmb, // <-- Adicionado aqui
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text("Cálculo de IMC e TMB"),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 1,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text(
+          'Cálculo de IMC e TMB',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(color: Colors.black, blurRadius: 4, offset: Offset(2, 2)),
+            ],
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          children: [
-            Form(
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset('assets/images/academia8.png', fit: BoxFit.cover),
+          ),
+          Container(color: Colors.black.withOpacity(0.5)),
+          SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 100, left: 24.0, right: 24.0, bottom: 24.0),
+            child: Form(
               key: _formKey,
               child: Column(
                 children: [
-                  TextField(
-                    controller: _alturaController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Altura com ponto, Exemplo: 1.60',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                  _buildTextField(_alturaController, 'Altura em metros (ex: 1.70)'),
                   const SizedBox(height: 16),
-                  TextField(
-                    controller: _pesoController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Peso, Exemplo: 60',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                  _buildTextField(_pesoController, 'Peso em Kilos (ex: 75)'),
                   const SizedBox(height: 16),
-                  TextField(
-                    controller: _idadeController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Idade, Exemplo: 25',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                  _buildTextField(_idadeController, 'Idade (ex: 23)'),
                   const SizedBox(height: 16),
-                  DropdownButtonFormField<String>(
-                    value: _sexoSelecionado,
-                    decoration: const InputDecoration(
-                      labelText: 'Sexo',
-                      border: OutlineInputBorder(),
-                    ),
-                    items: const [
-                      DropdownMenuItem(value: 'Masculino', child: Text('Masculino')),
-                      DropdownMenuItem(value: 'Feminino', child: Text('Feminino')),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        _sexoSelecionado = value!;
-                      });
+                  _buildDropdownSexo(),
+                  const SizedBox(height: 24),
+                  _buildBotao("Calcular Índice de Massa Corporal (IMC)", _calcularImc),
+                  const SizedBox(height: 12),
+                  _buildResultadoTexto(_resultadoImc),
+                  const SizedBox(height: 32),
+                  _buildBotao("Calcular Taxa Metabólica Basal (TMB)", _calcularTmb),
+                  const SizedBox(height: 12),
+                  _buildResultadoTexto(_resultadoTmb),
+                  const SizedBox(height: 32),
+                  _buildBotao("Gerar PDF", _gerarPdf, color: Colors.redAccent),
+                  const SizedBox(height: 24),
+                  _buildBotao(
+                    "Ir para Tela Principal",
+                        () {
+                      NavegacaoController.irParaTelaComValidacao(
+                        context: context,
+                        formKey: _formKey,
+                        proximaTela: TelaInicial(),
+                      );
                     },
+                    color: Colors.blueAccent,
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-
-            /// Botão de Calcular IMC
-            ElevatedButton(
-              onPressed: _calcularImc,
-              child: const Text("Calcular IMC"),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              _resultadoImc,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: 32),
-
-            /// Botão de Calcular TMB
-            ElevatedButton(
-              onPressed: _calcularTmb,
-              child: const Text("Calcular TMB"),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              _resultadoTmb,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: _gerarPdf,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent,
-                foregroundColor: Colors.white,
-                minimumSize: const Size.fromHeight(50),
-              ),
-              child: const Text("Gerar PDF"),
-            ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                NavegacaoController.irParaTelaComValidacao(
-                  context: context,
-                  formKey: _formKey,
-                  proximaTela: TelaInicial(),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueAccent,
-                foregroundColor: Colors.white,
-                minimumSize: const Size.fromHeight(50),
-              ),
-              child: const Text("Ir para Tela Principal"),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget _buildTextField(TextEditingController controller, String label) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: TextInputType.number,
+      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        filled: true,
+        fillColor: Colors.white.withOpacity(0.1),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Por favor, insira o valor';
+        }
+        return null;
+      },
+    );
+  }
+
+  Widget _buildDropdownSexo() {
+    return DropdownButtonFormField<String>(
+      value: _sexoSelecionado,
+      dropdownColor: Colors.grey[900],
+      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      decoration: InputDecoration(
+        labelText: 'Sexo',
+        labelStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        filled: true,
+        fillColor: Colors.white.withOpacity(0.1),
+      ),
+      items: const [
+        DropdownMenuItem(value: 'Masculino', child: Text('Masculino', style: TextStyle(color: Colors.white))),
+        DropdownMenuItem(value: 'Feminino', child: Text('Feminino', style: TextStyle(color: Colors.white))),
+      ],
+      onChanged: (value) {
+        setState(() {
+          _sexoSelecionado = value!;
+        });
+      },
+    );
+  }
+
+  Widget _buildBotao(String texto, VoidCallback onPressed, {Color color = Colors.teal}) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+        foregroundColor: Colors.white,
+        minimumSize: const Size.fromHeight(50),
+      ),
+      child: Text(texto),
+    );
+  }
+
+  Widget _buildResultadoTexto(String resultado) {
+    return Text(
+      resultado,
+      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+      textAlign: TextAlign.center,
     );
   }
 }
