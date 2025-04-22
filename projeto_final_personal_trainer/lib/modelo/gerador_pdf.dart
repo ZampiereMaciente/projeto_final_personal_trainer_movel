@@ -47,7 +47,8 @@ class GeradorPdf {
     );
 
     final dir = await getApplicationDocumentsDirectory();
-    final fileName = '${nomeAluno.replaceAll(" ", "_")}.pdf';
+    final timestamp = DateTime.now().toIso8601String().replaceAll(RegExp(r'[:.]'), '-');
+    final fileName = '${nomeAluno.replaceAll(" ", "_")}_$timestamp.pdf';
     final file = File('${dir.path}/$fileName');
 
     await file.writeAsBytes(await pdf.save());

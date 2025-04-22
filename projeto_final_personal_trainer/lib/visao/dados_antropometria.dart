@@ -189,7 +189,7 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
                   ElevatedButton(
                     onPressed: _irParaTelaImc,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
+                      backgroundColor: Colors.lightGreen,
                       foregroundColor: Colors.white,
                       minimumSize: const Size.fromHeight(50),
                     ),

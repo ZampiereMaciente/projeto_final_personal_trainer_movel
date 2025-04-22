@@ -106,8 +106,8 @@ class _TelaImcState extends State<TelaImc> {
         'Peso': _pesoController.text,
         'Idade': _idadeController.text,
         'Sexo': _sexoSelecionado,
-        'Resultado IMC': _resultadoImc,
-        'Resultado TMB': _resultadoTmb,
+        'Resultado IMC': _resultadoImc.startsWith('IMC') ? _resultadoImc : 'Não calculado',
+        'Resultado TMB': _resultadoTmb.startsWith('TMB') ? _resultadoTmb : 'Não calculado',
       },
     );
   }
@@ -167,10 +167,9 @@ class _TelaImcState extends State<TelaImc> {
                   _buildBotao(
                     "Ir para Tela Principal",
                         () {
-                      NavegacaoController.irParaTelaComValidacao(
-                        context: context,
-                        formKey: _formKey,
-                        proximaTela: TelaInicial(),
+                      // Modificação: Navegação direta sem validação de formulário
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => TelaInicial()),
                       );
                     },
                     color: Colors.blueAccent,
