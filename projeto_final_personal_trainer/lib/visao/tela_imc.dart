@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projeto_final_personal_trainer/visao/tela_inicial.dart';
 import '../controle/navegacao_controle.dart';
 import '../modelo/aluno.dart';
 import '../modelo/calculadora_imc.dart';
 import '../modelo/calculadora_tmb.dart';
 import '../modelo/gerador_pdf.dart';
+import '../util/formatadores_input.dart'; // Importa os formatadores
 
 class TelaImc extends StatefulWidget {
   final Aluno aluno;
@@ -27,8 +29,8 @@ class _TelaImcState extends State<TelaImc> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _calcularImc() {
-    final double? altura = double.tryParse(_alturaController.text);
-    final double? peso = double.tryParse(_pesoController.text);
+    final double? altura = double.tryParse(_alturaController.text.replaceAll(',', '.'));
+    final double? peso = double.tryParse(_pesoController.text.replaceAll(',', '.'));
 
     if (altura == null || peso == null || altura <= 0 || peso <= 0) {
       setState(() {
@@ -44,8 +46,8 @@ class _TelaImcState extends State<TelaImc> {
   }
 
   void _calcularTmb() {
-    final double? altura = double.tryParse(_alturaController.text);
-    final double? peso = double.tryParse(_pesoController.text);
+    final double? altura = double.tryParse(_alturaController.text.replaceAll(',', '.'));
+    final double? peso = double.tryParse(_pesoController.text.replaceAll(',', '.'));
     final int? idade = int.tryParse(_idadeController.text);
 
     if (altura == null || peso == null || idade == null || altura <= 0 || peso <= 0 || idade <= 0) {
@@ -141,11 +143,11 @@ class _TelaImcState extends State<TelaImc> {
               key: _formKey,
               child: Column(
                 children: [
-                  _buildTextField(_alturaController, 'Altura em metros (ex: 1.70)'),
+                  _buildTextField(_alturaController, 'Altura em metros (ex: 1.70)', FormatadoresInput.altura),
                   const SizedBox(height: 16),
-                  _buildTextField(_pesoController, 'Peso em Kilos (ex: 75)'),
+                  _buildTextField(_pesoController, 'Peso em Kilos (ex: 75)', FormatadoresInput.peso),
                   const SizedBox(height: 16),
-                  _buildTextField(_idadeController, 'Idade (ex: 23)'),
+                  _buildTextField(_idadeController, 'Idade (ex: 23)', FormatadoresInput.idade),
                   const SizedBox(height: 16),
                   _buildDropdownSexo(),
                   const SizedBox(height: 24),
@@ -179,10 +181,11 @@ class _TelaImcState extends State<TelaImc> {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String label) {
+  Widget _buildTextField(TextEditingController controller, String label, TextInputFormatter formatter) {
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.number,
+      inputFormatters: [formatter],
       style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       decoration: InputDecoration(
         labelText: label,

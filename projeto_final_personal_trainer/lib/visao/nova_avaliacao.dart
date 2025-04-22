@@ -8,7 +8,7 @@ class NovaAvaliacao extends StatefulWidget {
   const NovaAvaliacao({Key? key}) : super(key: key);
 
   @override
-  _NovaAvaliacaoState createState() => _NovaAvaliacaoState();
+  State<NovaAvaliacao> createState() => _NovaAvaliacaoState();
 }
 
 class _NovaAvaliacaoState extends State<NovaAvaliacao> {
@@ -104,18 +104,15 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
       ),
       body: Stack(
         children: [
-          // Fundo com imagem
           Positioned.fill(
             child: Image.asset(
               'assets/images/academia2.png',
               fit: BoxFit.cover,
             ),
           ),
-          // Camada escura sobre a imagem
           Positioned.fill(
             child: Container(color: Colors.black.withOpacity(0.4)),
           ),
-          // Conteúdo principal
           SafeArea(
             child: SingleChildScrollView(
               child: ConstrainedBox(
@@ -130,17 +127,15 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
                         _buildTextField(
                           controller: nomeController,
                           label: "Nome",
-                          validator: (value) => value == null || value.isEmpty ? "Digite o nome" : null,
+                          validator: (value) =>
+                          value == null || value.isEmpty ? "Digite o nome" : null,
                         ),
                         _buildTextField(
                           controller: nascimentoController,
                           label: "Data de Nascimento",
                           hint: "DD/MM/AAAA",
                           keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            DataInputFormatter(),
-                          ],
+                          inputFormatters: [FormatadoresInput.data],
                           validator: (value) {
                             if (value == null || value.isEmpty) return 'Informe a data';
                             final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
@@ -153,10 +148,7 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
                           label: "Telefone",
                           hint: "(XX) XXXXX-XXXX",
                           keyboardType: TextInputType.phone,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            TelefoneInputFormatter(),
-                          ],
+                          inputFormatters: [FormatadoresInput.telefone],
                           validator: (value) {
                             if (value == null || value.isEmpty) return 'Informe o telefone';
                             final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
@@ -181,10 +173,7 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
                           label: "Data da Próxima Avaliação",
                           hint: "DD/MM/AAAA",
                           keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            DataInputFormatter(),
-                          ],
+                          inputFormatters: [FormatadoresInput.data],
                           validator: (value) {
                             if (value == null || value.isEmpty) return 'Informe a data';
                             final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
