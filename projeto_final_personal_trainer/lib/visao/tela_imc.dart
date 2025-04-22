@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projeto_final_personal_trainer/visao/tela_inicial.dart';
@@ -73,11 +75,12 @@ class _TelaImcState extends State<TelaImc> {
     GeradorPdf.gerarPdf(
       nomeAluno: widget.aluno.nome,
       dadosPessoais: {
-        'Nome': widget.aluno.nome ?? 'Não informado',
-        'Data de Nascimento': widget.aluno.nascimento ?? 'Não informado',
-        'Telefone': widget.aluno.telefone ?? 'Não informado',
-        'Email': widget.aluno.email ?? 'Não informado',
-        'Data da Próxima Avaliação': widget.aluno.dataProximaAvaliacao ?? 'Não informado',
+        'Nome': widget.aluno.nome,
+        'Data de Nascimento': widget.aluno.nascimento,
+        'Telefone': widget.aluno.telefone,
+        'Email': widget.aluno.email,
+        'Data da Próxima Avaliação': widget.aluno.dataProximaAvaliacao,
+        'Horário da Próxima Avaliação': widget.aluno.horarioProximaAvaliacao,
       },
       dobrasCutaneas: {
         'Tríceps': widget.aluno.triceps ?? 'Não informado',

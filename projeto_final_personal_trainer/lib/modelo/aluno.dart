@@ -1,16 +1,21 @@
 class Aluno {
-  String nome;
-  String nascimento;
-  String telefone;
-  String email;
-  String dataProximaAvaliacao;
+  // Informações básicas
+  final String nome;
+  final String nascimento;
+  final String telefone;
+  final String email;
 
-  // Novos campos (tornados anuláveis)
+  // Avaliação futura
+  final String dataProximaAvaliacao;
+  final String horarioProximaAvaliacao;
+
+  // Dobras cutâneas (opcional)
   String? triceps;
   String? subescapular;
   String? suprailica;
   String? abdomenDobras;
 
+  // Circunferências (opcional)
   String? bracoDir;
   String? bracoEsq;
   String? antebracoDir;
@@ -23,12 +28,14 @@ class Aluno {
   String? pernaDir;
   String? pernaEsq;
 
+  // Construtor
   Aluno({
     required this.nome,
     required this.nascimento,
     required this.telefone,
     required this.email,
     required this.dataProximaAvaliacao,
+    required this.horarioProximaAvaliacao,
     this.triceps,
     this.subescapular,
     this.suprailica,
@@ -45,4 +52,31 @@ class Aluno {
     this.pernaDir,
     this.pernaEsq,
   });
+
+  // Métodos utilitários (ex: converter para Map)
+  Map<String, dynamic> toMap() {
+    return {
+      'nome': nome,
+      'nascimento': nascimento,
+      'telefone': telefone,
+      'email': email,
+      'dataProximaAvaliacao': dataProximaAvaliacao,
+      'horarioProximaAvaliacao': horarioProximaAvaliacao,
+      'triceps': triceps,
+      'subescapular': subescapular,
+      'suprailica': suprailica,
+      'abdomenDobras': abdomenDobras,
+      'bracoDir': bracoDir,
+      'bracoEsq': bracoEsq,
+      'antebracoDir': antebracoDir,
+      'antebracoEsq': antebracoEsq,
+      'abdomenCirc': abdomenCirc,
+      'quadril': quadril,
+      'cintura': cintura,
+      'coxaDir': coxaDir,
+      'coxaEsq': coxaEsq,
+      'pernaDir': pernaDir,
+      'pernaEsq': pernaEsq,
+    };
+  }
 }

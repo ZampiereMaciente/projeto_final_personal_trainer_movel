@@ -10,7 +10,7 @@ class GeradorPdf {
     required Map<String, String> dadosPessoais,
     required Map<String, String> dobrasCutaneas,
     required Map<String, String> circunferencias,
-    required Map<String, String> dadosImcTmb, // <- Novo parâmetro
+    required Map<String, String> dadosImcTmb,
     required String nomeAluno,
   }) async {
     final pdf = pw.Document();
@@ -38,15 +38,16 @@ class GeradorPdf {
           _criarTabela(circunferencias),
           pw.SizedBox(height: 20),
 
-          // Nova Seção: IMC e TMB
+          // Seção: IMC e TMB
           pw.Text('Cálculo de IMC e TMB', style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
           _criarTabela(dadosImcTmb),
+          pw.SizedBox(height: 20),
         ],
       ),
     );
 
     final dir = await getApplicationDocumentsDirectory();
-    final fileName = '${nomeAluno}.pdf';
+    final fileName = '${nomeAluno.replaceAll(" ", "_")}.pdf';
     final file = File('${dir.path}/$fileName');
 
     await file.writeAsBytes(await pdf.save());

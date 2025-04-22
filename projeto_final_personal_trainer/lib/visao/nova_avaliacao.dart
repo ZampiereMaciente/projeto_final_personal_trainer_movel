@@ -18,6 +18,7 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
   final telefoneController = TextEditingController();
   final emailController = TextEditingController();
   final dataProxController = TextEditingController();
+  final horarioProxController = TextEditingController(); // Controller para horário
 
   @override
   void dispose() {
@@ -26,6 +27,7 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
     telefoneController.dispose();
     emailController.dispose();
     dataProxController.dispose();
+    horarioProxController.dispose(); // Dispose do controller de horário
     super.dispose();
   }
 
@@ -37,6 +39,7 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
         telefone: telefoneController.text,
         email: emailController.text,
         dataProximaAvaliacao: dataProxController.text,
+        horarioProximaAvaliacao: horarioProxController.text, // Passando o horário para o objeto aluno
       );
 
       Navigator.push(
@@ -178,6 +181,20 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
                             if (value == null || value.isEmpty) return 'Informe a data';
                             final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
                             if (digits.length != 8) return 'Data incompleta';
+                            return null;
+                          },
+                        ),
+                        _buildTextField(
+                          controller: horarioProxController,
+                          label: "Horário da Próxima Avaliação",
+                          hint: "HH:mm",
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FormatadoresInput.hora], // Usando o formatador de hora
+                          validator: (value) {
+                            if (value == null || value.isEmpty) return 'Informe o horário';
+                            final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
+                            // Alterando a verificação para aceitar o formato HH:mm
+                            if (digits.length != 4) return 'Horário incompleto. Exemplo: 08:30';
                             return null;
                           },
                         ),
