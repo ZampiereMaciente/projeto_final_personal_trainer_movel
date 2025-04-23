@@ -68,7 +68,9 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
           hintText: hint,
           filled: true,
           fillColor: Colors.white70,
-          border: const OutlineInputBorder(),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20), // Bordas arredondadas
+          ),
         ),
         validator: validator,
         inputFormatters: inputFormatters,
@@ -149,7 +151,7 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
                         _buildTextField(
                           controller: telefoneController,
                           label: "Telefone",
-                          hint: "(XX) XXXXX-XXXX",
+                          hint: "(99) 99999-9999",
                           keyboardType: TextInputType.phone,
                           inputFormatters: [FormatadoresInput.telefone],
                           validator: (value) {

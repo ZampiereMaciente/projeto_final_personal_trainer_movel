@@ -213,7 +213,14 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
           labelText: label,
           filled: true,
           fillColor: Colors.white70,
-          border: const OutlineInputBorder(),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10), // Borda arredondada
+            borderSide: const BorderSide(color: Colors.black45),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10), // Borda arredondada
+            borderSide: const BorderSide(color: Colors.black45),
+          ),
         ),
         keyboardType: TextInputType.number,
         validator: (value) {

@@ -188,20 +188,20 @@ class _TelaImcState extends State<TelaImc> {
       controller: controller,
       keyboardType: TextInputType.number,
       inputFormatters: [formatter],
-      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      style: const TextStyle(color: Colors.black45, fontWeight: FontWeight.bold),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        labelStyle: const TextStyle(color: Colors.black45, fontWeight: FontWeight.bold),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
+          borderSide: const BorderSide(color: Colors.black45),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
+          borderSide: const BorderSide(color: Colors.black45),
           borderRadius: BorderRadius.circular(10),
         ),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.1),
+        fillColor: Colors.white60, // Definindo o fillColor para todos os campos
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -215,25 +215,25 @@ class _TelaImcState extends State<TelaImc> {
   Widget _buildDropdownSexo() {
     return DropdownButtonFormField<String>(
       value: _sexoSelecionado,
-      dropdownColor: Colors.grey[900],
-      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      dropdownColor: Colors.white, // Cor mais clara para o dropdown
+      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold), // Texto em preto
       decoration: InputDecoration(
         labelText: 'Sexo',
-        labelStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        labelStyle: const TextStyle(color: Colors.black45, fontWeight: FontWeight.bold),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
+          borderSide: const BorderSide(color: Colors.black45),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white),
+          borderSide: const BorderSide(color: Colors.black45),
           borderRadius: BorderRadius.circular(10),
         ),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.1),
+        fillColor: Colors.white60, // Cor de fundo mais clara para o Dropdown
       ),
       items: const [
-        DropdownMenuItem(value: 'Masculino', child: Text('Masculino', style: TextStyle(color: Colors.white))),
-        DropdownMenuItem(value: 'Feminino', child: Text('Feminino', style: TextStyle(color: Colors.white))),
+        DropdownMenuItem(value: 'Masculino', child: Text('Masculino', style: TextStyle(color: Colors.black45))),
+        DropdownMenuItem(value: 'Feminino', child: Text('Feminino', style: TextStyle(color: Colors.black45))),
       ],
       onChanged: (value) {
         setState(() {
