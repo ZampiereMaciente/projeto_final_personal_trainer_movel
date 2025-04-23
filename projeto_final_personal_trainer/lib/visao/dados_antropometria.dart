@@ -127,7 +127,7 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
 
           // Overlay escuro
           Container(
-            color: Colors.black.withOpacity(0.4),
+            color: const Color.fromARGB(90, 0, 0, 0),
           ),
 
           // Conteúdo principal

@@ -23,7 +23,7 @@ class TelaInicial extends StatelessWidget {
 
           // Conteúdo sobre a imagem
           Container(
-            color: Colors.black.withOpacity(0.3), // escurece a imagem de fundo
+          color: const Color.fromARGB(90, 0, 0, 0), // escurece a imagem de fundo
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(24.0),

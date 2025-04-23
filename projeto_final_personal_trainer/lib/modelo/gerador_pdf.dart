@@ -56,7 +56,7 @@ class GeradorPdf {
   }
 
   static pw.Widget _criarTabela(Map<String, String> dados) {
-    return pw.Table.fromTextArray(
+    return pw.TableHelper.fromTextArray(
       border: pw.TableBorder.all(),
       cellAlignment: pw.Alignment.centerLeft,
       headerDecoration: pw.BoxDecoration(color: PdfColors.grey300),

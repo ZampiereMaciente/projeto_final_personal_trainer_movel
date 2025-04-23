@@ -116,7 +116,7 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
             ),
           ),
           Positioned.fill(
-            child: Container(color: Colors.black.withOpacity(0.4)),
+            child: Container(color: const Color.fromARGB(90, 0, 0, 0)),
           ),
           SafeArea(
             child: SingleChildScrollView(

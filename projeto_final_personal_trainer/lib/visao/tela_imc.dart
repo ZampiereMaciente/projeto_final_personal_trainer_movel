@@ -139,7 +139,7 @@ class _TelaImcState extends State<TelaImc> {
           Positioned.fill(
             child: Image.asset('assets/images/academia8.png', fit: BoxFit.cover),
           ),
-          Container(color: Colors.black.withOpacity(0.5)),
+          Container(color: const Color.fromARGB(90, 0, 0, 0)),
           SingleChildScrollView(
             padding: const EdgeInsets.only(top: 100, left: 24.0, right: 24.0, bottom: 24.0),
             child: Form(
