@@ -46,6 +46,8 @@ class GeradorPdf {
       ),
     );
 
+    // retorna um Directory que aponta para um local no sistema de arquivos do
+    // dispositivo que é exclusivo para o seu aplicativo.
     final dir = await getApplicationDocumentsDirectory();
     final timestamp = DateTime.now().toIso8601String().replaceAll(RegExp(r'[:.]'), '-');
     final fileName = '${nomeAluno.replaceAll(" ", "_")}_$timestamp.pdf';

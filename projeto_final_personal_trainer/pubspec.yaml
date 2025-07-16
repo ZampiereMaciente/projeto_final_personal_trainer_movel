@@ -61,6 +61,9 @@ flutter:
     - assets/images/academia2.png
     - assets/images/academia6.png
     - assets/images/academia8.png
+    - assets/images/logo.png
+    - assets/images/logo2.png
+    - assets/images/logo3.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

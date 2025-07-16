@@ -23,13 +23,25 @@ class TelaInicial extends StatelessWidget {
 
           // Conteúdo sobre a imagem
           Container(
-          color: const Color.fromARGB(90, 0, 0, 0), // escurece a imagem de fundo
-            child: Center(
+            color: const Color.fromARGB(90, 0, 0, 0), // escurece a imagem de fundo
+            child: Center( // O Center ainda vai centralizar horizontalmente
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  // *** Mude aqui: ***
+                  mainAxisAlignment: MainAxisAlignment.start, // Alinha os filhos no topo
+                  // *** E adicione um espaçamento inicial aqui: ***
                   children: [
+                    SizedBox(height: MediaQuery.of(context).padding.top + 32), // Espaçamento do topo + safe area
+                    // --- Adicione a imagem do logo aqui ---
+                    Image.asset(
+                      'assets/images/logo3.png',
+                      width: 250,
+                      height: 250,
+                    ),
+                    const SizedBox(height: 16), // Espaçamento entre o logo e o texto
+                    // --- Fim da adição da imagem ---
+
                     const RainbowText(text: 'Bem-vindo!'),
                     const SizedBox(height: 32),
                     ElevatedButton.icon(

@@ -142,9 +142,9 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
                           keyboardType: TextInputType.number,
                           inputFormatters: [FormatadoresInput.data],
                           validator: (value) {
-                            if (value == null || value.isEmpty) return 'Informe a data';
-                            final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
-                            if (digits.length != 8) return 'Data incompleta';
+                            // if (value == null || value.isEmpty) return 'Informe a data';
+                            // final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
+                            // if (digits.length != 8) return 'Data incompleta';
                             return null;
                           },
                         ),
@@ -155,18 +155,24 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
                           keyboardType: TextInputType.phone,
                           inputFormatters: [FormatadoresInput.telefone],
                           validator: (value) {
-                            if (value == null || value.isEmpty) return 'Informe o telefone';
-                            final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
-                            if (digits.length < 10) return 'Telefone inválido';
+                            // if (value == null || value.isEmpty) return 'Informe o telefone';
+                            // final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
+                            // if (digits.length < 10) return 'Telefone inválido';
                             return null;
                           },
                         ),
                         _buildTextField(
                           controller: emailController,
                           label: "E-mail",
+                          hint: "email@.com",
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
-                            if (value == null || value.isEmpty) return 'Informe o e-mail';
+                            // if (value == null || value.isEmpty) return 'Informe o e-mail';
+
+                            if (value == null || value.isEmpty) {
+                              return null;
+                            }
+
                             if (!value.contains('@') || !value.contains('.')) {
                               return 'E-mail inválido';
                             }
@@ -180,9 +186,9 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
                           keyboardType: TextInputType.number,
                           inputFormatters: [FormatadoresInput.data],
                           validator: (value) {
-                            if (value == null || value.isEmpty) return 'Informe a data';
-                            final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
-                            if (digits.length != 8) return 'Data incompleta';
+                            // if (value == null || value.isEmpty) return 'Informe a data';
+                            // final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
+                            // if (digits.length != 8) return 'Data incompleta';
                             return null;
                           },
                         ),
@@ -193,10 +199,10 @@ class _NovaAvaliacaoState extends State<NovaAvaliacao> {
                           keyboardType: TextInputType.number,
                           inputFormatters: [FormatadoresInput.hora], // Usando o formatador de hora
                           validator: (value) {
-                            if (value == null || value.isEmpty) return 'Informe o horário';
-                            final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
-                            // Alterando a verificação para aceitar o formato HH:mm
-                            if (digits.length != 4) return 'Horário incompleto. Exemplo: 08:30';
+                            // if (value == null || value.isEmpty) return 'Informe o horário';
+                            // final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
+                            // // Alterando a verificação para aceitar o formato HH:mm
+                            // if (digits.length != 4) return 'Horário incompleto. Exemplo: 08:30';
                             return null;
                           },
                         ),

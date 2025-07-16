@@ -17,6 +17,7 @@ class RainbowText extends StatefulWidget {
 class _RainbowTextState extends State<RainbowText>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  // Declara um objeto Animation que representa o valor animado
   late Animation<double> _animation;
 
   @override
@@ -28,6 +29,7 @@ class _RainbowTextState extends State<RainbowText>
     _animation = Tween<double>(begin: 0, end: 2 * 3.1415).animate(_controller);
   }
 
+  // liberar o AnimationController para evitar vazamentos de memória.
   @override
   void dispose() {
     _controller.dispose();
@@ -39,6 +41,7 @@ class _RainbowTextState extends State<RainbowText>
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
+        // especie de gradiante
         return ShaderMask(
           shaderCallback: (Rect bounds) {
             return LinearGradient(
@@ -53,6 +56,7 @@ class _RainbowTextState extends State<RainbowText>
               ],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
+              // realiza a rotacao usando _animation.value no valor de 0 a 2 * pi
               transform: GradientRotation(_animation.value),
             ).createShader(bounds);
           },

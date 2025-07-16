@@ -175,8 +175,8 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
 
                   _buildTextField("Braço (dir)", bracoDirController),
                   _buildTextField("Braço (esq)", bracoEsqController),
-                  _buildTextField("Antibraço (dir)", antebracoDirController),
-                  _buildTextField("Antibraço (esq)", antebracoEsqController),
+                  _buildTextField("Antebraço (dir)", antebracoDirController),
+                  _buildTextField("Antebraço (esq)", antebracoEsqController),
                   _buildTextField("Abdômen", abdomenCircController),
                   _buildTextField("Quadril", quadrilController),
                   _buildTextField("Cintura", cinturaController),
@@ -224,9 +224,10 @@ class _DadosAntropometriaState extends State<DadosAntropometria> {
         ),
         keyboardType: TextInputType.number,
         validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Informe o valor';
-          }
+          // if para verificar se os valores forem nulos dos campos de antoprometria
+        //   if (value == null || value.isEmpty) {
+        //     return 'Informe o valor';
+        //   }
           return null;
         },
       ),

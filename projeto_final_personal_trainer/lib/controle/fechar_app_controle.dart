@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FecharApp {
   static void fecharApp(BuildContext context) async {
@@ -22,7 +23,9 @@ class FecharApp {
     );
 
     if (confirmar == true) {
-      exit(0);
+      //exit(0);
+      // Use SystemNavigator.pop() para fechar o app de forma mais robusta.
+      SystemNavigator.pop();
     }
   }
 }
